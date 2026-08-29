@@ -16,6 +16,19 @@ The optimization engine jointly manages energy discharge/charge schedules alongs
 
 ---
 
+### Sample Market Data & Constraints (`market_prices_co_optimization.csv`)
+
+| Hour | DA Price (€/MWh) | FCR Price (€/MW) | Grid Limit (MW) | Description / Market Condition |
+| :--- | :--- | :--- | :--- | :--- |
+| **00:00** | 40.0 | 12.0 | 1.0 | Standard Base Load |
+| **05:00** | -15.0 | 12.0 | 1.0 | Early morning negative pricing |
+| **06:00** | -45.0 | 14.5 | 0.3 | Peak solar surge & grid congestion |
+| **07:00** | -20.0 | 14.5 | 0.1 | Severe bottleneck (Minimum export) |
+| **12:00** | 110.0 | 11.0 | 0.0 | Full grid curtailment (Zero export) |
+| **19:00** | 150.0 | 15.0 | 1.0 | Evening peak demand window |
+
+---
+
 ### Key Features
 * **Multi-Market Revenue Stacking:** Simultaneously captures value from energy arbitrage (Day-Ahead) and capacity payments (FCR).
 * **Joint Power Headroom Constraints:** Automatically ensures that inverter capacity is safely shared between energy dispatch and frequency regulation reserves ($P_{dispatch} + R_{fcr} \le P_{max}$).
@@ -28,6 +41,8 @@ The optimization engine jointly manages energy discharge/charge schedules alongs
 ```text
 bess-multi-market-optimizer/
 │
+├── data/
+│   └── market_prices_co_optimization.csv
 ├── notebooks/
 │   └── co_optimization_demo.ipynb
 ├── bess_co_optimization_dark.gif
